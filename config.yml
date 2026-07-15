@@ -15,6 +15,7 @@ dotfiles_repo_version: main
 dotfiles_repo_local_destination: ~/.dotfiles
 dotfiles_files:
   - .alias
+  - .osx
 
 homebrew_installed_packages:
   - uv
@@ -22,14 +23,17 @@ homebrew_installed_packages:
   - gh
   - azure-cli
   - openjdk # if macOS/IDEs can't find it, symlink per `brew info openjdk`
-  - terraform # for the `tf` alias
   - kubernetes-cli # for the `k` alias
   - helm
   - jupyterlab # for the `jn`/`jl` aliases
   - neovim # for the `vi` alias
   - bat # for the `cat` alias
+  # Terraform was pulled from homebrew-core over HashiCorp's BSL license change;
+  # it now only lives in HashiCorp's own tap (see homebrew_taps below).
+  - hashicorp/tap/terraform # for the `tf` alias
 
-homebrew_taps: []
+homebrew_taps:
+  - hashicorp/tap
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
