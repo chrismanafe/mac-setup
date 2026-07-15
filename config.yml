@@ -6,15 +6,15 @@
 # Never put secrets in here (e.g. mas_email / mas_password) — leave those blank and
 # supply them with --extra-vars or environment-based prompts if ever needed.
 
-# Dotfiles are not wired up yet. Point this at your own dotfiles repo when you have one,
-# then flip configure_dotfiles back to true.
-configure_dotfiles: false
-# dotfiles_repo: https://github.com/chrismanafe/dotfiles.git
-# dotfiles_repo_local_destination: ~/Development/GitHub/dotfiles
-# dotfiles_files:
-#   - .zshrc
-#   - .gitconfig
-#   - .config
+# Only .alias is symlinked here (not .zshrc/.gitconfig) so the role's
+# "replace existing file" behavior can't clobber your real, already-configured
+# dotfiles. ~/.alias is loaded from ~/.zshrc via tasks/source-alias.yml.
+configure_dotfiles: true
+dotfiles_repo: https://github.com/chrismanafe/dotfiles.git
+dotfiles_repo_version: main
+dotfiles_repo_local_destination: ~/.dotfiles
+dotfiles_files:
+  - .alias
 
 homebrew_installed_packages:
   - uv
@@ -22,6 +22,12 @@ homebrew_installed_packages:
   - gh
   - azure-cli
   - openjdk # if macOS/IDEs can't find it, symlink per `brew info openjdk`
+  - terraform # for the `tf` alias
+  - kubernetes-cli # for the `k` alias
+  - helm
+  - jupyterlab # for the `jn`/`jl` aliases
+  - neovim # for the `vi` alias
+  - bat # for the `cat` alias
 
 homebrew_taps: []
 

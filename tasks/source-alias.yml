@@ -1,0 +1,7 @@
+---
+- name: Ensure ~/.zshrc sources ~/.alias.
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.zshrc"
+    line: '[ -f "$HOME/.alias" ] && source "$HOME/.alias"'
+    create: true
+    insertafter: EOF
