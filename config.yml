@@ -41,6 +41,11 @@ homebrew_cask_apps:
   - visual-studio-code
   - cursor
   - rectangle
+  # karabiner-elements' installer needs a privileged .pkg install with its own
+  # interactive sudo prompt, which fails non-interactively under Ansible ("a
+  # terminal is required to read the password"). Install it manually first:
+  #   brew install --cask karabiner-elements
+  # then re-run the playbook; it'll skip it since it's already installed.
   - karabiner-elements
   - raycast
   - postman
