@@ -1,0 +1,52 @@
+---
+# Personal overrides for chrismanafe/mac-setup (fork of geerlingguy/mac-dev-playbook).
+# This file IS tracked in git here (unlike upstream's template convention) since this
+# fork exists to be the shared source of truth across my own Macs.
+#
+# Never put secrets in here (e.g. mas_email / mas_password) — leave those blank and
+# supply them with --extra-vars or environment-based prompts if ever needed.
+
+# Dotfiles are not wired up yet. Point this at your own dotfiles repo when you have one,
+# then flip configure_dotfiles back to true.
+configure_dotfiles: false
+# dotfiles_repo: https://github.com/chrismanafe/dotfiles.git
+# dotfiles_repo_local_destination: ~/Development/GitHub/dotfiles
+# dotfiles_files:
+#   - .zshrc
+#   - .gitconfig
+#   - .config
+
+homebrew_installed_packages:
+  - uv
+  - node # provides npm and npx
+  - gh
+  - azure-cli
+  - openjdk # if macOS/IDEs can't find it, symlink per `brew info openjdk`
+
+homebrew_taps: []
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps:
+  - ghostty
+  - sublime-text
+  - obsidian
+  - codex
+  - claude-code
+  - visual-studio-code
+  - cursor
+  - rectangle
+  - karabiner-elements
+  - raycast
+  - postman
+  - docker-desktop
+  - google-chrome
+  - brave-browser
+
+mas_installed_apps: []
+
+configure_dock: false
+configure_sublime: false
+
+# Oh My Zsh has no Homebrew package; install it via a custom post-provision task.
+post_provision_tasks:
+  - tasks/oh-my-zsh.yml
