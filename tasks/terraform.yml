@@ -1,0 +1,22 @@
+---
+# Homebrew only loads formulae from non-official taps once they're trusted
+# (`brew trust`), which the geerlingguy.mac.homebrew role doesn't do. So
+# terraform is installed here, after the role has tapped hashicorp/tap.
+- name: Get trusted Homebrew taps.
+  command: "{{ homebrew_brew_bin_path }}/brew trust --json v1"
+  register: brew_trust
+  changed_when: false
+  check_mode: false
+  become: false
+
+- name: Trust the hashicorp/tap Homebrew tap.
+  command: "{{ homebrew_brew_bin_path }}/brew trust --tap hashicorp/tap"
+  when: "'hashicorp/tap' not in (brew_trust.stdout | from_json).taps"
+  become: false
+
+- name: Install terraform from hashicorp/tap.
+  homebrew:
+    path: "{{ homebrew_brew_bin_path }}"
+    name: hashicorp/tap/terraform
+    state: present
+  become: false

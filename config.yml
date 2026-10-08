@@ -28,20 +28,25 @@ homebrew_installed_packages:
   - jupyterlab # for the `jn`/`jl` aliases
   - neovim # for the `vi` alias
   - bat # for the `cat` alias
-  # Terraform was pulled from homebrew-core over HashiCorp's BSL license change;
-  # it now only lives in HashiCorp's own tap (see homebrew_taps below).
-  - hashicorp/tap/terraform # for the `tf` alias
 
+# Terraform was pulled from homebrew-core over HashiCorp's BSL license change;
+# it now only lives in HashiCorp's own tap. The tap is added here, but terraform
+# (for the `tf` alias) is installed by tasks/terraform.yml, since the tap has to
+# be `brew trust`ed first.
 homebrew_taps:
   - hashicorp/tap
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
   - ghostty
+  - zed
+  - pycharm
   - sublime-text
   - obsidian
-  - codex
-  - claude-code
+  - codex # OpenAI's terminal coding agent (not the ChatGPT app)
+  - chatgpt
+  - claude-code # CLI
+  - claude # desktop app
   - visual-studio-code
   - cursor
   - rectangle
